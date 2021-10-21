@@ -13,7 +13,9 @@ export function ensureAuthenticated(
   const authToken = request.headers.authorization;
 
   if (!authToken) {
-    return response.status(401).json({ error: 'Token provided is invalid!' });
+    return response
+      .status(401)
+      .json({ error: 'There is not a valid token provided!' });
   }
 
   const [, token] = authToken.split(' ');
@@ -25,6 +27,6 @@ export function ensureAuthenticated(
 
     return next();
   } catch (err) {
-    return response.status(401).json({ error: 'Token expired!' });
+    return response.status(401).json({ error: 'Token given is expired!' });
   }
 }
